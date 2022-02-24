@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Input, FormControl } from '@chakra-ui/react'
 
-const CharacterSearch = ({ getCharacter, setCharacters }) => {
-
-    const [ search, setSearch ] = useState("");
+const CharacterSearch = ({ getCharacter, setCharacters, search, setSearch }) => {
 
     const getCharacterQuest = () => {
         const SEARCH_API = 'https://rickandmortyapi.com/api/character/?name=' + search;
