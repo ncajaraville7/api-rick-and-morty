@@ -1,19 +1,23 @@
-import React, { useState } from 'react'
-import { Box, Stack, Image, Text, Button } from '@chakra-ui/react'
+import React from 'react'
+import { Box, Stack, Image, Text, Button, Icon } from '@chakra-ui/react'
+import { FaHeart } from "react-icons/fa";
 
 const Character = ({ id, image, name, favorite, setFavorite }) => {
 
-  const [ isFavorite, setIsFavorite ] = useState(false)
+  const updateState = favorite.find( item => item.characterId === id)
 
   const handleClick = () => {
 
     const characterObj = {
       characterId: id,
       characterImg: image,
-      characterName: name
+      characterName: name,
     }
-      setFavorite([...favorite, characterObj])
-      setIsFavorite(true)
+      if(updateState) {
+        console.log('Ya está en favoritos')
+      } else {
+        setFavorite([...favorite, characterObj])
+      }
   }
 
   return (
@@ -23,7 +27,7 @@ const Character = ({ id, image, name, favorite, setFavorite }) => {
       </Box>
       <Stack direction='row' justify='space-between' align='center' backgroundColor='gray.800' m='0 !important' p={3}>
         <Text>{name}</Text>
-        { !isFavorite ? <Button backgroundColor='gray.700' _hover={{backgroundColor: 'gray.600'}} onClick={ handleClick }>ADD +</Button> : ''}
+        { !updateState ? <Button backgroundColor='gray.700' _hover={{backgroundColor: 'gray.600'}} onClick={ handleClick }>ADD +</Button> : <Icon as={FaHeart} backgroundColor='gray.700' w={8} h={8} p={2} rounded={4} />}
       </Stack>
     </Stack>
   )
