@@ -4,7 +4,7 @@ import { FaHeart } from "react-icons/fa";
 
 const Character = ({ id, image, name, favorite, setFavorite }) => {
 
-  const updateState = favorite.find( item => item.characterId === id)
+  const characterFind = favorite.find( item => item.characterId === id)
 
   const handleClick = () => {
 
@@ -13,11 +13,10 @@ const Character = ({ id, image, name, favorite, setFavorite }) => {
       characterImg: image,
       characterName: name,
     }
-      if(updateState) {
-        console.log('Ya está en favoritos')
-      } else {
+      if(!characterFind) {
         setFavorite([...favorite, characterObj])
-      }
+        return;
+      } 
   }
 
   return (
@@ -27,7 +26,7 @@ const Character = ({ id, image, name, favorite, setFavorite }) => {
       </Box>
       <Stack direction='row' justify='space-between' align='center' backgroundColor='gray.800' m='0 !important' p={3}>
         <Text>{name}</Text>
-        { !updateState ? <Button backgroundColor='gray.700' _hover={{backgroundColor: 'gray.600'}} onClick={ handleClick }>ADD +</Button> : <Icon as={FaHeart} backgroundColor='gray.700' w={8} h={8} p={2} rounded={4} />}
+        { !characterFind ? <Button backgroundColor='gray.700' _hover={{backgroundColor: 'gray.600'}} onClick={ handleClick }>ADD +</Button> : <Icon as={FaHeart} backgroundColor='gray.700' w={8} h={8} p={2} rounded={4} />}
       </Stack>
     </Stack>
   )
