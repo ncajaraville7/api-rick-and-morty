@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Stack } from '@chakra-ui/react'
+import { Stack, Text } from '@chakra-ui/react'
 
 import Character from './Character'
 import CharacterSearch from './CharacterSearch';
@@ -28,7 +28,7 @@ const CharacterList = ({ favorite, setFavorite }) => {
       <CharacterSearch getCharacter={getCharacter} setCharacters={setCharacters} search={search} setSearch={setSearch} />
   
       <Stack direction='row' wrap='wrap' justify='center' aling='center' gap={8} p={8}>
-        { characters.map( item => <Character key={item.id} {...item} favorite={favorite} setFavorite={setFavorite} />) }
+        { characters.length < 0  ? <Text>No hay resultados</Text> : characters.map( item => <Character key={item.id} {...item} favorite={favorite} setFavorite={setFavorite} />) }
       </Stack>
 
       <Paginador page={page} setPage={setPage} search={search}/>
